@@ -278,7 +278,7 @@ def fig5(prof):
 
     note = ""
     if se_donor is not None and se_cell is not None:
-        note += "　（**深色棒=供者级标准误（主口径）**，浅色棒=细胞级标准误（对照）"
+        note += "　（深色棒=供者级标准误（主口径），浅色棒=细胞级标准误（对照）"
     elif se_cell is not None:
         note += "　（横线为细胞级标准误"
     if "low_confidence" in prof.columns:
@@ -412,7 +412,7 @@ def fig7():
     a1.text(xpos, real + 1.6, f"{real:.1f}%", ha="center",
             fontsize=10, fontweight="bold")
     ticks.append(xpos)
-    ticklabels.append("**真实数据**")
+    ticklabels.append("真实数据")
 
     a1.set_xticks(ticks)
     a1.set_xticklabels(ticklabels, fontsize=8)
@@ -647,17 +647,13 @@ def fig10():
     a2.set_xlabel("主口径 TAI（从古老到年轻）")
     a2.set_ylabel("ΔTAI = 长蛋白版 − 主口径")
     a2.set_title("右：偏倚是否随年龄增强？\n"
-                 "（无明显趋势 → 是**整体平移**；梯度 ρ = −0.1326，p = 0.079）",
+                 "（无明显趋势 → 整体平移而非梯度；ρ = −0.1326，p = 0.079）",
                  fontsize=10)
     a2.legend(fontsize=8.5, loc="lower right")
     a2.grid(alpha=0.25)
 
-    fig.suptitle("图10  检验 D：长蛋白版 TAI 绝对值对照"
-                 "（Moyers & Zhang 2018 批评的最后一环）\n"
-                 "注：本图**量化**了绝对年龄偏倚，并未消除它；"
-                 "结论是「相对排序稳健、绝对年龄不可直接解读」",
-                 fontsize=10)
-    fig.tight_layout(rect=[0, 0, 1, 0.87])
+    fig.suptitle("")
+    fig.tight_layout()
     out = os.path.join(FIG_DIR, "fig10_longprot_comparison.png")
     fig.savefig(out, dpi=180)
     plt.close(fig)

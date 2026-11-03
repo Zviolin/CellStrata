@@ -196,11 +196,11 @@
 \textbf{系统发育地层学}（phylostratigraphy）正是这样一套方法：把某一物种的基因组置于系统发育树上，
 考察每个基因最早出现在树的哪个节点，以此把基因划分为若干“年龄层”（stratum）。
 Trigos 等\cite{trigos2017} 借助 16 种脊椎动物的蛋白质组，把 17,318 个人类蛋白编码基因划分为 16 层；
-Domazet-Lošo 等\cite{domazetloso2017} 则用 19 个物种给出粒度更细的版本。
+Domazet-Lošo 与 Tautz\cite{domazetloso2010} 则给出更细的 19 层划分。
 \textbf{两套层号体系互不通用，不能混用}——这是使用这类年龄表时最容易犯的第一个错误。
 
 已有工作主要停留在\textbf{单个基因}层面（基因有多古老）、或\textbf{整个组织}层面
-（转录组的整体年龄，如 Lu 等\cite{lu2017} 的组织年龄时钟）。一个自然的延伸问题是：
+（转录组的整体年龄，如 Ren 与 Kuan\cite{ren2020} 的多组织转录组年龄计算器）。一个自然的延伸问题是：
 \textbf{当粒度下沉到单细胞类型的水平，“某种细胞类型主要由哪一年代的基因搭起来”这个问题，数据能否回答？}
 
 然而，把 phylostratigraphy 推广到单细胞数据面临三个实质困难。
@@ -245,7 +245,7 @@ Domazet-Lošo 等\cite{domazetloso2017} 则用 19 个物种给出粒度更细的
     \toprule
     数据集 & 规模 & 来源与获取方式 \\
     \midrule
-    Tabula Sapiens 1.0 & 483,152 细胞；177 细胞类型 & CELLxGENE Discover 2023-05-15 快照，\textbf{HTTP Range 远程分块读取}\cite{conservation2020} \\
+    Tabula Sapiens 1.0 & 483,152 细胞；177 细胞类型 & CELLxGENE Discover 2023-05-15 快照，\textbf{HTTP Range 远程分块读取}\cite{tabulaspians2022} \\
     Trigos 等 2017 & 17,318 基因 $\times$ 16 层 & 论文补充材料，直接下载\cite{trigos2017} \\
     Liebeskind 等 2016 & 13 算法共识层 & 论文补充材料，直接下载\cite{liebeskind2016} \\
     UniProt 蛋白长度 & 17,103 基因 & REST 接口批量获取（检验 D 前置） \\
@@ -313,7 +313,7 @@ Top 集大小 $M$、命中数 $k$，命中数服从超几何分布 $\mathrm{Hype
 
 \subsection{无监督分析与零假设基线}
 
-对 177 个细胞类型的 16 维年龄构成做 PCA，再做 K-means 聚类，报告轮廓系数与调整兰德指数（ARI）\cite{mccune2002}。
+对 177 个细胞类型的 16 维年龄构成做 PCA，再做 K-means 聚类，报告轮廓系数\cite{rousseeuw1987}与调整兰德指数（ARI）\cite{hubert1985}。
 关键在零假设基线的选择：
 \begin{enumerate}[label=(\roman*)]
   \item \textbf{逐列置换基线}：打乱每一层在细胞类型间的取值，破坏层间结构但保留边缘分布；
@@ -648,12 +648,12 @@ $\Delta\tai$ 均值 $-0.0572$、中位 $-0.0536$、标准差仅 0.0251；
 
 \subsection{与既有工作的关系}
 
-本文不与 Trigos 等\cite{trigos2017} 或 Domazet-Lošo 等\cite{domazetloso2017}
+本文不与 Trigos 等\cite{trigos2017} 或 Domazet-Lošo 与 Tautz\cite{domazetloso2010}
 竞争基因年龄估计的精度——那需要更多的物种参照与更精细的算法。
 本文做的是把已有的年龄表\textbf{投射到单细胞类型层面}，
 并\textbf{把 phylostratigraphy 的已知方法学偏差在细胞类型粒度上定量出来}。
 
-与组织层面的转录组年龄工作\cite{lu2017} 相比，本文的粒度更细，
+与组织层面的转录组年龄工作\cite{ren2020} 相比，本文的粒度更细，
 且额外处理了两个在组织层面不会出现的问题：供者级伪重复与组成数据的秩亏。
 
 一个值得注意的观察是\textbf{中性粒细胞的“年轻化”}：NAMPT$^{+}$ 中性粒细胞（4.420）
@@ -724,7 +724,7 @@ $\Delta\tai$ 均值 $-0.0572$、中位 $-0.0536$、标准差仅 0.0251；
 % =====================================================================
 \section*{声明}
 \noindent{\bfseries 数据可得性}
-Tabula Sapiens 1.0 数据来自 CELLxGENE Discover（公开，CC BY 4.0）\cite{conservation2020}；
+Tabula Sapiens 1.0 数据来自 CELLxGENE Discover（公开，CC BY 4.0）\cite{tabulaspians2022}；
 基因年龄表来自 Trigos 等\cite{trigos2017} 与 Liebeskind 等\cite{liebeskind2016}
 的补充材料；蛋白长度来自 UniProt。本研究未产生新的测序数据。
 

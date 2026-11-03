@@ -37,7 +37,7 @@
 |---|---|
 | `main.tex` | 论文源文件（中文正文，cjc 文档类 + XeLaTeX） |
 | `cjc.cls` / `cjc.bst` | 中文期刊模板的类文件与参考文献样式（编译必需） |
-| `references.bib` | 参考文献库（21 条；正文实际引用 12 条，未引条目不进 PDF） |
+| `references.bib` | 参考文献库（**13 条，逐条经 Crossref 核实**，见下方说明） |
 | `main.pdf` | 编译产物（13 页，A4，中文期刊双栏版式） |
 | `journal-template/` | 模板原始归档（含官方示例 `cjc-example.tex`） |
 | `main_oup_1col_backup.tex` | 上一版：OUP 官方模板单栏版 |
@@ -88,6 +88,43 @@ xelatex main.tex      # 第 3 遍：交叉引用收敛
 其中 **§4.3 方法学教训** 专门写了本项目**自己踩过的七个坑**（双单尾右尾退化、派生列泄漏、
 `numpy.argmax` 遇 NaN、PCA 零假设置换对象、Spearman 同义反复、宏 F1 幽灵类、
 `NumDBsContributing` 语义误读），这些是本项目最有方法学价值的产出。
+
+## 参考文献：13 条全部经 Crossref 核实
+
+> ⚠ **本项目的文献库曾被整批写错**，这是个必须记住的教训。
+> 早期版本的 `references.bib` 里，条目的**题目像真的、作者像真的、DOI 也像真的**，
+> 但逐条查 Crossref 后发现：12 条里 **8 条对不上**——
+> `trigos2017` 的 DOI 指向另一篇文章、作者名单被编造成了 18 人；
+> `liebeskind2016` 的卷期页码和作者全错；
+> `moyers2015` / `moyers2017` 的标题与期刊对不上；
+> 号称 Tabula Sapiens 的那条写成了 Science 2020, 369(6506):489-497（真实为 2022, 376(6594):eabl4896）；
+> `lu2017`「Lu 等的组织年龄时钟」**根本查无此文**；`mccune2002` 也不是 ARI 的出处。
+>
+> **这类错误不会让编译报错**，BibTeX 照样排版、编号照样连续，只有去查才会发现。
+> 对一个"看起来专业"的 PDF 来说，这是比任何排版问题都严重得多的硬伤。
+
+现在的 13 条一律**先核实再录入**，核实口径是 Crossref 的九项一致：
+题目 / 作者 / 刊名 / 年 / 卷 / 期 / 页码 / DOI / 文章号。核对方式：
+
+```bash
+curl -s "https://api.crossref.org/works/<DOI>"          # 按 DOI 直查
+curl -s -G "https://api.crossref.org/works" \
+     --data-urlencode "query.bibliographic=<题目>"        # 按题目模糊查
+```
+
+| # | 条目 | 用途 |
+|---|---|---|
+| 1 | Trigos 等 2017, PNAS 114(24):6406–6411 | 16 层年龄表（主口径） |
+| 2 | Liebeskind 等 2016, GBE 8(6):1812–1823 | 13 算法共识表（交叉验证） |
+| 3 | Domazet-Lošo 与 Tautz 2010, Nature 468:815–818 | TAI 原始文献 + 19 层体系 |
+| 4–6 | Moyers 与 Zhang 2015 / 2017 / 2018 | 系统发育地层学偏倚批评 |
+| 7 | Tabula Sapiens Consortium 2022, Science 376:eabl4896 | 单细胞图谱数据源 |
+| 8 | Hafemeister 与 Satija 2019, Genome Biol 20:296 | 单细胞归一化 / 供者级不确定性 |
+| 9 | Ren 与 Kuan 2020, PLoS ONE 15(8):e0237006 | 多组织转录组年龄计算器 |
+| 10 | Benjamini 与 Hochberg 1995, JRSS-B 57(1):289–300 | BH 多重检验校正 |
+| 11 | Breiman 2001, Mach Learn 45(1):5–32 | 随机森林 |
+| 12 | Hubert 与 Arabie 1985, J Classif 2(1):193–218 | 调整兰德指数（ARI） |
+| 13 | Rousseeuw 1987, J Comput Appl Math 20:53–65 | 轮廓系数 |
 
 ## 与报告的关系
 

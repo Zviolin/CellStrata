@@ -35,7 +35,8 @@ from scipy import sparse
 from common import (H5AD_PATH, AGGR_PATH, PROFILE_PATH, LINEAGE_MAP_PATH,
                     DONOR_TABLE_PATH, ANALYSIS_DIR, STRATUM_NAMES,
                     die, info, ok, warn, require_file,
-                    load_gene_age, map_genes, compute_age_profile, open_source)
+                    load_gene_age, load_protein_lengths, map_genes,
+                    compute_age_profile, open_source)
 from ts_io import TabulaSapiens
 
 
@@ -59,6 +60,13 @@ def parse_args():
                    help="用 X 而不是 raw.X（仅当 X 是原始计数时）")
     p.add_argument("--source", choices=["auto", "slice", "h5ad"], default="auto",
                    help="数据源：auto=有切片用切片 / slice=只用切片 / h5ad=只用完整文件")
+    p.add_argument("--min-length", type=int, default=0,
+                   help="只用蛋白长度 ≥ N aa 的基因重算（0 = 不过滤）。"
+                        "这是 Moyers & Zhang (2018) 建议的更彻底版本修正："
+                        "不只重跑富集层，而是**重算 TAI 绝对值**")
+    p.add_argument("--tag", default="",
+                   help="输出文件名后缀，便于与主口径并存比较"
+                        "（如 --tag longprot → celltype_age_profile_longprot.tsv）")
     return p.parse_args()
 
 
@@ -254,6 +262,14 @@ def main():
     args = parse_args()
     age_df = load_gene_age()
 
+    # 输出路径助手：--tag 非空时所有产出加后缀，避免覆盖主口径结果。
+    # 长蛋白版必须与主口径**并存**才能对照，两者不能写同一个文件名。
+    suffix = f"_{args.tag}" if args.tag else ""
+
+    def out_path(name):
+        stem, ext = os.path.splitext(name)
+        return os.path.join(ANALYSIS_DIR, f"{stem}{suffix}{ext}")
+
     prefer = {"auto": None, "slice": True, "h5ad": False}[args.source]
     ts = open_source(prefer)
     if args.use_x and not hasattr(ts, "f"):
@@ -274,6 +290,33 @@ def main():
         if matched.sum() < 1000:
             die(f"匹配上的基因只有 {matched.sum()} 个，太少。\n"
                 f"  跑 01_检查数据.py 看基因名格式。")
+
+        # ---------- 长蛋白过滤（Moyers & Zhang 2018 建议的彻底版修正）----------
+        # 短序列基因更容易被 phylostratigraphy 误判为「年轻」。
+        # 做法：把短蛋白的层号置为 NaN。build_layer_indicator() 与
+        # compute_age_profile() 都以 `~isnan(stratum)` 筛选，
+        # 因此**逐细胞 TAI** 与 **类型级 TAI/占比** 会同时只用长蛋白重算。
+        # ⚠ 查不到长度信息的基因**保持原样**：它们不是「短蛋白」，
+        #   不能因为缺信息就把它们当成过短剔除（那是把「未知」当「否」）。
+        # ⚠ `matched` 保持不变——它后面要用来断言「二次映射结果一致」，
+        #   改了会让那个自检失去意义。真正参与计算的数量另记 n_effective。
+        short_mask = None
+        n_effective = int(matched.sum())
+        if args.min_length > 0:
+            lengths = load_protein_lengths()
+            sym_upper = pd.Index(ts.symbols()).astype(str).str.upper()
+            ln = lengths.reindex(sym_upper).to_numpy(dtype=float)
+            short_mask = np.isfinite(ln) & (ln < args.min_length)
+            n_no_len = int((~np.isfinite(ln)).sum())
+            stratum = stratum.copy()
+            stratum[short_mask] = np.nan
+            n_effective = int(np.isfinite(stratum).sum())
+            info(f"长蛋白过滤（长度 ≥ {args.min_length} aa）："
+                 f"剔除 {int(short_mask.sum()):,} 个短蛋白；"
+                 f"另有 {n_no_len:,} 个基因查不到长度，**保留**")
+            info(f"参与年龄构成计算的基因：{n_effective:,}"
+                 f"（原 {int(matched.sum()):,}）")
+
         layer_ind = build_layer_indicator(stratum, ts.n_vars)
         info(f"年龄层指示矩阵：{layer_ind.shape[0]:,} 基因 × "
              f"{layer_ind.shape[1]} 层，非零 {layer_ind.nnz:,}")
@@ -300,8 +343,15 @@ def main():
             donor_tab.index.name = "cell_type"
 
     # ---------- 落盘：平均表达 ----------
-    mean_expr.to_csv(AGGR_PATH, sep="\t")
-    ok(f"已写出：{AGGR_PATH}  ({mean_expr.shape[0]} 类型 × {mean_expr.shape[1]} 基因)")
+    # ⚠ mean_expr 是 93 MB 的全基因矩阵，且**不随长蛋白过滤而变**
+    #   （过滤作用在 stratum 上，不在表达矩阵上）。
+    #   所以带 --tag 重跑时不必再写一遍，直接跳过，省 93 MB 写盘。
+    if args.tag:
+        info(f"--tag {args.tag}：跳过写出 {os.path.basename(AGGR_PATH)}"
+             f"（内容与主口径完全相同，不重复落盘）")
+    else:
+        mean_expr.to_csv(AGGR_PATH, sep="\t")
+        ok(f"已写出：{AGGR_PATH}  ({mean_expr.shape[0]} 类型 × {mean_expr.shape[1]} 基因)")
 
     qc_df.to_csv(os.path.join(ANALYSIS_DIR, "qc_summary.tsv"), sep="\t", index=False)
     if lineage_map is not None:
@@ -321,6 +371,15 @@ def main():
         die(f"匹配上的基因只有 {matched.sum()} 个，太少。\n"
             f"  跑 01_检查数据.py 看基因名格式。")
 
+    # ⚠ 长蛋白过滤必须在**这里再应用一次**：上面 353 行把 stratum 覆盖成了
+    #    未过滤的二次映射结果。不重新过滤的话，类型级 TAI 会用回全部基因，
+    #    与逐细胞 TAI（已过滤）口径不一致 —— 那是最难发现的一类错误。
+    if short_mask is not None:
+        stratum = stratum.copy()
+        stratum[short_mask] = np.nan
+        n_effective = int(np.isfinite(stratum).sum())
+        info(f"类型级 TAI 同步应用长蛋白过滤：参与基因 {n_effective:,}")
+
     # ---------- 年龄构成 ----------
     info("计算年龄构成与 TAI……")
     profile = compute_age_profile(mean_expr, stratum)
@@ -333,7 +392,7 @@ def main():
         cell_tai["cell_type"] = ct_names[cell_tai["code"].to_numpy()]
         cell_tai["donor_id"] = (donors_all[cell_tai["row"].to_numpy()]
                                 if donors_all is not None else "")
-        cell_tai.to_csv(os.path.join(ANALYSIS_DIR, "cell_tai.tsv"),
+        cell_tai.to_csv(out_path("cell_tai.tsv"),
                         sep="\t", index=False)
 
         g = cell_tai.groupby("cell_type")["TAI"]
@@ -392,8 +451,9 @@ def main():
                     f"属系统性偏移而非随机抖动——两者是不同的估计量，不可互换）")
         ok(f"已写出：{os.path.join(ANALYSIS_DIR, 'cell_tai.tsv')}")
 
-    profile.to_csv(PROFILE_PATH, sep="\t")
-    ok(f"已写出：{PROFILE_PATH}")
+    profile_path = out_path("celltype_age_profile.tsv")
+    profile.to_csv(profile_path, sep="\t")
+    ok(f"已写出：{profile_path}")
 
     # ---------- 稳健性：剔除低命中层后 TAI 排序是否稳定 ----------
     # S15（人亚科）命中 64%、S16（智人）69%，远低于其余层的 93–96%。
@@ -439,7 +499,7 @@ def main():
                   - hi_aligned["TAI"].rank()).abs()
     n_moved = int((rank_shift > 0).sum())
     max_shift = int(rank_shift.max())
-    hi_path = os.path.join(ANALYSIS_DIR, "celltype_age_profile_highhit.tsv")
+    hi_path = out_path("celltype_age_profile_highhit.tsv")
     profile_hi.to_csv(hi_path, sep="\t")
 
     # 偏倚是否同质？把 TAI 变化量对「该类型的 S15+S16 表达占比」做回归。
@@ -489,7 +549,9 @@ def main():
     print("=" * 62)
     print(f"  细胞类型数：{len(profile)}")
     print(f"  年龄层数：{len([c for c in profile.columns if c.startswith('S')])}")
-    print(f"  用到的基因数：{int(matched.sum()):,}")
+    print(f"  用到的基因数：{n_effective:,}"
+          + (f"（长蛋白过滤：长度 ≥ {args.min_length} aa）"
+             if args.min_length > 0 else ""))
 
     prop = profile[[c for c in profile.columns if c.startswith("S")]].values
     row_sum = prop.sum(axis=1)

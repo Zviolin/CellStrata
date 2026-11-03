@@ -619,6 +619,65 @@ def main():
     if "Spearman ρ = 1.0000" not in rep:
         check("报告保留了『曾报告 1.0000』的修正记录", False, True)
 
+    # ---------- 13. 长蛋白版 TAI（闭合 Moyers & Zhang 批评的最后一环）----------
+    # 03 脚本加 --min-length 100 --tag longprot 后，用长蛋白重算 TAI 绝对值，
+    # 与主口径逐类型对照，把「年轻偏倚」的方向与大小**直接量化**出来。
+    lpc_path = os.path.join(ANALYSIS_DIR, "longprot_comparison.tsv")
+    lps_path = os.path.join(ANALYSIS_DIR, "longprot_summary.tsv")
+    if not (os.path.exists(lpc_path) and os.path.exists(lps_path)):
+        CHECKS[0] += 1
+        FAILS.append("缺少长蛋白对照结果：先跑 "
+                     "python 03_细胞类型年龄谱.py --min-length 100 --tag longprot "
+                     "再跑 python 94_长蛋白对照.py")
+    else:
+        lpc = pd.read_csv(lpc_path, sep="\t")
+        lps = pd.read_csv(lps_path, sep="\t").iloc[0]
+
+        check("长蛋白对照表类型数", len(lpc), 177)
+        check("长蛋白对照表首列是 cell_type", lpc.columns[0], "cell_type")
+        check("长蛋白版 Spearman ρ", float(lps["spearman_rho"]), 0.9845, tol=5e-4)
+        check("长蛋白版 Kendall τ", float(lps["kendall_tau"]), 0.9186, tol=5e-4)
+        check("长蛋白版 ΔTAI 均值", float(lps["delta_mean"]), -0.0572, tol=5e-4)
+        check("长蛋白版 |ΔTAI| 中位", float(lps["abs_delta_median"]), 0.0536, tol=5e-4)
+        check("长蛋白版 |ΔTAI| 最大", float(lps["abs_delta_max"]), 0.2523, tol=5e-4)
+        check("变年轻的类型数（应为全部 177）",
+              int(lps["n_shift_younger"]), 177)
+        check("名次变动的类型数", int(lps["n_rank_changed"]), 163)
+        check("最大名次位移", int(lps["max_rank_shift"]), 79)
+        check("Top10 重合数", int(lps["top10_overlap"]), 9)
+        check("ΔTAI 的年龄梯度 ρ（应接近 0）",
+              float(lps["gradient_rho"]), -0.1326, tol=5e-4)
+        check("最古老 10 类 ΔTAI 均值",
+              float(lps["delta_oldest10"]), -0.0663, tol=5e-4)
+        check("最年轻 10 类 ΔTAI 均值",
+              float(lps["delta_youngest10"]), -0.0725, tol=5e-4)
+        check("长蛋白版 TAI 最小值", float(lps["tai_lp_min"]), 3.1717, tol=5e-4)
+        check("长蛋白版 TAI 最大值", float(lps["tai_lp_max"]), 4.3284, tol=5e-4)
+        check("长蛋白版 TAI 中位数", float(lps["tai_lp_median"]), 3.6933, tol=5e-4)
+        check("长蛋白版 TAI 跨类型 SD", float(lps["tai_lp_sd"]), 0.1801, tol=5e-4)
+
+        # 自洽性：逐类型表必须与汇总表一致（不能只改汇总不改明细）
+        # ⚠ 容差 5e-4：汇总表的 delta_mean 是**四舍五入到 4 位**后落盘的
+        #    （-0.0572），而明细表均值是全精度（-0.05717965...），
+        #    用 1e-6 会把"精度口径差异"误报成"数据不一致"。
+        #    这类断言的正解是"两边各自舍入到汇总表的小数位后比较"。
+        check("对照表 ΔTAI 均值与汇总一致",
+              round(float(lpc["delta"].mean()), 4), float(lps["delta_mean"]), tol=1e-9)
+        check("对照表里变年轻的类型数一致",
+              int((lpc["delta"] < 0).sum()), int(lps["n_shift_younger"]))
+        check("长蛋白版 TAI 全体低于主口径（系统性下移）",
+              bool((lpc["delta"] < 0).all()), True)
+
+        # 报告正文必须写上这些数字（否则就是「算了但没写」）
+        check_report_num("报告 长蛋白版 Spearman ρ", rep,
+                         float(lps["spearman_rho"]),
+                         pattern=r"长蛋白版[^\n|]*?Spearman ρ\s*=\s*\*\*([\d.]+)\*\*",
+                         decimals=4)
+        check_report_num("报告 长蛋白版 ΔTAI 均值", rep,
+                         float(lps["delta_mean"]),
+                         pattern=r"ΔTAI 均值\s*=\s*\*\*([+\-−]?[\d.]+)\*\*",
+                         decimals=4)
+
     # ---------- 汇总 ----------
     print("=" * 70)
     print(f"终审核对：共 {CHECKS[0]} 项检查")

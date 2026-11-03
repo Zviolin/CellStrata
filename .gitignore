@@ -34,3 +34,15 @@ __pycache__/
 .DS_Store
 Thumbs.db
 ~$*
+
+# LaTeX 编译中间文件（main.pdf 与 .tex/.bib 入库）
+50-论文/*.aux
+50-论文/*.bbl
+50-论文/*.blg
+50-论文/*.log
+50-论文/*.out
+50-论文/*.toc
+50-论文/*.synctex.gz
+
+# 报告导 PDF 的中间 HTML（可由 96_导出报告PDF.py 重新生成）
+40-报告/_report_preview.html

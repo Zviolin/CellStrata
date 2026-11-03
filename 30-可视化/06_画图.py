@@ -599,6 +599,82 @@ def fig9():
     ok(out)
 
 
+# ---------- 图 10：长蛋白版 TAI 对照（检验 D） ----------
+def fig10():
+    """
+    检验 D 的配图：把「短基因换成同层其余长基因」后，TAI 绝对值怎么变。
+
+    左图：主口径 TAI vs 长蛋白版 TAI 的散点 + y=x 参考线。
+          全部 177 点都在 y=x 下方 → 绝对年龄被系统性低估（整体下移）。
+    右图：ΔTAI（= 长蛋白版 − 主口径）按主口径 TAI 排序的散点。
+          若偏倚是「随年龄梯度增强」，右图应呈明显的上升/下降趋势；
+          实测梯度 ρ = −0.1326（p = 0.079，不显著）→ 是**平移**不是**梯度**。
+    """
+    lpc_path = os.path.join(ANALYSIS_DIR, "longprot_comparison.tsv")
+    if not os.path.exists(lpc_path):
+        info("跳过图10：先跑 03_细胞类型年龄谱.py --min-length 100 --tag longprot "
+             "与 94_长蛋白对照.py")
+        return
+    tab = pd.read_csv(lpc_path, sep="\t")
+    tb = tab["TAI_base"].values
+    tl = tab["TAI_longprot"].values
+    d = tab["delta"].values
+
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(12, 5))
+
+    # ---- 左：主口径 vs 长蛋白版 ----
+    lo = float(min(tb.min(), tl.min())) - 0.06
+    hi = float(max(tb.max(), tl.max())) + 0.06
+    a1.plot([lo, hi], [lo, hi], "--", color="#999999", lw=1.2,
+            label="y = x（无偏倚）")
+    a1.scatter(tb, tl, s=16, alpha=0.62, color="#4c72b0",
+               edgecolor="none", zorder=3)
+    # 回归线（仅作视觉参考）
+    k, b = np.polyfit(tb, tl, 1)
+    xs = np.linspace(lo, hi, 50)
+    a1.plot(xs, k * xs + b, "-", color="#c44e52", lw=1.6,
+            label=f"回归线 y = {k:.3f}x + {b:.3f}")
+    a1.set_xlim(lo, hi)
+    a1.set_ylim(lo, hi)
+    a1.set_xlabel("主口径 TAI（全部年龄注释基因）")
+    a1.set_ylabel("长蛋白版 TAI（仅 ≥100 aa 基因）")
+    a1.set_title("左：177 种细胞类型的 TAI 对照\n"
+                 f"（全部落在 y=x 下方 → 绝对年龄系统性低估；"
+                 f"Spearman ρ = 0.9845）", fontsize=10)
+    a1.legend(fontsize=8.5, loc="upper left")
+    a1.grid(alpha=0.25)
+
+    # ---- 右：ΔTAI vs 主口径 TAI ----
+    order = np.argsort(tb)
+    xs2 = tb[order]
+    ds = d[order]
+    a2.axhline(0.0, color="#999999", lw=1.0)
+    a2.scatter(xs2, ds, s=16, alpha=0.65, color="#55a868",
+               edgecolor="none", zorder=3)
+    k2, b2 = np.polyfit(xs2, ds, 1)
+    xs3 = np.linspace(xs2.min(), xs2.max(), 50)
+    a2.plot(xs3, k2 * xs3 + b2, "-", color="#c44e52", lw=1.6,
+            label=f"拟合斜率 {k2:+.4f}")
+    a2.set_xlabel("主口径 TAI（从古老到年轻）")
+    a2.set_ylabel("ΔTAI = 长蛋白版 − 主口径")
+    a2.set_title("右：偏倚是否随年龄增强？\n"
+                 "（无明显趋势 → 是**整体平移**；梯度 ρ = −0.1326，p = 0.079）",
+                 fontsize=10)
+    a2.legend(fontsize=8.5, loc="lower right")
+    a2.grid(alpha=0.25)
+
+    fig.suptitle("图10  检验 D：长蛋白版 TAI 绝对值对照"
+                 "（Moyers & Zhang 2018 批评的最后一环）\n"
+                 "注：本图**量化**了绝对年龄偏倚，并未消除它；"
+                 "结论是「相对排序稳健、绝对年龄不可直接解读」",
+                 fontsize=10)
+    fig.tight_layout(rect=[0, 0, 1, 0.87])
+    out = os.path.join(FIG_DIR, "fig10_longprot_comparison.png")
+    fig.savefig(out, dpi=180)
+    plt.close(fig)
+    ok(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true", help="含 UMAP（需读 h5ad）")
@@ -617,6 +693,7 @@ def main():
     fig7()
     fig8()
     fig9()
+    fig10()
     if args.all:
         fig6(prof, args.group_key)
 

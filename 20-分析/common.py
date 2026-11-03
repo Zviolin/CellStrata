@@ -41,6 +41,7 @@ GENE_AGE_META = os.path.join(DATA_DIR, "gene_age_Liebeskind2016_共识与误差�
 
 # 产物
 GENE_AGE_CLEAN = os.path.join(DATA_DIR, "gene_age.tsv")
+PROTEIN_LENGTH_PATH = os.path.join(DATA_DIR, "protein_length.tsv")
 AGGR_PATH = os.path.join(ANALYSIS_DIR, "celltype_mean_expr.tsv")
 PROFILE_PATH = os.path.join(ANALYSIS_DIR, "celltype_age_profile.tsv")
 LINEAGE_MAP_PATH = os.path.join(ANALYSIS_DIR, "lineage_map.tsv")
@@ -146,9 +147,26 @@ def load_gene_age():
     return df
 
 
+def load_protein_lengths():
+    """
+    读取 UniProt 蛋白长度表，返回 Series[symbol → length]（长度单位 aa）。
+
+    由 93_获取蛋白长度.py 生成。用于 Moyers & Zhang (2018) 建议的
+    「只用长蛋白重算绝对年龄」修正——短序列基因更容易被 phylostratigraphy
+    误判为「年轻」。
+    """
+    require_file(PROTEIN_LENGTH_PATH, "请先运行 93_获取蛋白长度.py 生成")
+    df = pd.read_csv(PROTEIN_LENGTH_PATH, sep="\t")
+    need = {"symbol", "length"}
+    if not need.issubset(df.columns):
+        die(f"蛋白长度表缺列。现有列：{df.columns.tolist()}，需要 {need}")
+    return df.set_index(df["symbol"].astype(str).str.upper())["length"]
+
+
 def map_genes(var_names, age_df):
     """
     把表达矩阵的基因名映射到年龄表。
+
     返回 (matched_mask, stratum_array)。
 
     matched_mask: 长度 = len(var_names) 的布尔数组

@@ -1,0 +1,2 @@
+n_types	spearman_rho	kendall_tau	pearson_r	delta_mean	delta_median	abs_delta_median	abs_delta_max	n_shift_younger	pct_shift_younger	gradient_rho	gradient_p	n_rank_changed	max_rank_shift	top10_overlap	delta_oldest10	delta_youngest10	tai_base_min	tai_base_max	tai_base_median	tai_base_sd	tai_lp_min	tai_lp_max	tai_lp_median	tai_lp_sd
+177	0.9845	0.9186	0.9903	-0.0572	-0.0536	0.0536	0.2523	177	100.0	-0.1326	0.07857669567049058	163	79	9	-0.0663	-0.0725	3.2142	4.42	3.7552	0.181	3.1717	4.3284	3.6933	0.1801

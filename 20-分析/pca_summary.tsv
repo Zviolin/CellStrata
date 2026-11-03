@@ -1,0 +1,2 @@
+n_types	n_strata	real_rank	row_sum_max_dev	cum3_real	cum3_perm_mean	cum3_perm_sd	cum3_perm_p95	cum3_norm_mean	cum3_dirichlet_mean	cum3_dirichlet_sd	z_vs_perm	z_vs_dirichlet	pr_real	pr_perm_mean	pr_dirichlet_mean	n_high_corr_pairs	pc1	pc2	pc3
+177	16	15	0.0	0.619376	0.270472	0.007431	0.283881	0.276067	0.29033	0.00681	46.954	48.317	6.124	14.7418	13.7721	14	0.272709	0.225613	0.121054

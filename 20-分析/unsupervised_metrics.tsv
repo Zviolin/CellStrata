@@ -1,0 +1,2 @@
+n_types	n_features	pc1	pc2	pc3	cum3	k	silhouette	ari	ari_ward	silhouette_ward	ari_perm_mean	ari_perm_sd	ari_z	n_sens	k_sens	ari_sens	sil_sens	cum3_sens
+177	16	0.2727	0.2256	0.1211	0.6194	7	0.2354	0.2114	0.1704	0.1659	-0.0001	0.0104	20.35	152	5	0.159	0.2391	0.6341

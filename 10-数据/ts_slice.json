@@ -1,0 +1,14 @@
+{
+  "url": "https://s3.us-west-2.amazonaws.com/cellxgene-data-public/cell-census/2023-05-15/h5ads/53d208b0-2cfd-4366-9866-c3c6114081bc.h5ad",
+  "group_key": "cell_ontology_class",
+  "per_type": 200,
+  "chunk_len": 77540,
+  "n_cells": 28017,
+  "n_genes": 58604,
+  "nnz": 76668506,
+  "frac_of_cells": 0.058,
+  "frac_of_nnz": 0.0603,
+  "n_chunks_needed": 7183,
+  "bytes_downloaded": 3710693148,
+  "elapsed_s": 620.3
+}

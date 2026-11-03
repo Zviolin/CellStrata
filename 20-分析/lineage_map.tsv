@@ -1,0 +1,178 @@
+cell_type	lineage
+acinar cell of salivary gland	epithelial
+adipocyte	stromal
+adventitial cell	stromal
+alveolar fibroblast	stromal
+artery endothelial cell	endothelial
+b cell	immune
+basal cell	epithelial
+basal cell of prostate epithelium	epithelial
+basophil	immune
+bladder urothelial cell	epithelial
+bronchial smooth muscle cell	stromal
+bronchial vessel endothelial cell	endothelial
+capillary aerocyte	endothelial
+capillary endothelial cell	endothelial
+cardiac endothelial cell	endothelial
+cardiac muscle cell	stromal
+cd141-positive myeloid dendritic cell	immune
+cd1c-positive myeloid dendritic cell	immune
+cd24 neutrophil	immune
+cd4-positive alpha-beta t cell	immune
+cd4-positive helper t cell	immune
+cd4-positive, alpha-beta memory t cell	immune
+cd4-positive, alpha-beta t cell	immune
+cd8-positive alpha-beta t cell	immune
+cd8-positive, alpha-beta cytokine secreting effector t cell	immune
+cd8-positive, alpha-beta cytotoxic t cell	immune
+cd8-positive, alpha-beta memory t cell	immune
+cd8-positive, alpha-beta t cell	immune
+cd8b-positive nk t cell	immune
+cell of skeletal muscle	stromal
+ciliary body	epithelial
+ciliated cell	epithelial
+ciliated epithelial cell	epithelial
+classical monocyte	immune
+club cell	epithelial
+club cell of prostate epithelium	epithelial
+conjunctival epithelial cell	epithelial
+connective tissue cell	stromal
+corneal epithelial cell	epithelial
+corneal keratocyte	epithelial
+dendritic cell	immune
+dn1 thymic pro-t cell	immune
+dn3 thymocyte	immune
+dn4 thymocyte	immune
+double-positive, alpha-beta thymocyte	immune
+duct epithelial cell	epithelial
+duodenum glandular cell	epithelial
+endothelial cell	endothelial
+endothelial cell of artery	endothelial
+endothelial cell of hepatic sinusoid	endothelial
+endothelial cell of lymphatic vessel	endothelial
+endothelial cell of vascular tree	endothelial
+enterocyte of epithelium of large intestine	epithelial
+enterocyte of epithelium of small intestine	epithelial
+epithelial cell	epithelial
+epithelial cell of lacrimal sac	epithelial
+epithelial cell of uterus	epithelial
+erythrocyte	immune
+erythroid lineage cell	immune
+erythroid progenitor	immune
+eye photoreceptor cell	epithelial
+fast muscle cell	stromal
+fibroblast	stromal
+fibroblast of breast	stromal
+fibroblast of cardiac tissue	stromal
+goblet cell	epithelial
+granulocyte	immune
+gut endothelial cell	endothelial
+hematopoietic stem cell	immune
+hepatocyte	epithelial
+hillock cell of prostate epithelium	epithelial
+hillock-club cell of prostate epithelium	epithelial
+immature enterocyte	epithelial
+immature natural killer cell	immune
+immune cell	immune
+innate lymphoid cell	immune
+intermediate monocyte	immune
+intestinal crypt stem cell	epithelial
+intestinal crypt stem cell of large intestine	epithelial
+intestinal crypt stem cell of small intestine	epithelial
+intestinal enteroendocrine cell	epithelial
+intestinal tuft cell	epithelial
+intrahepatic cholangiocyte	epithelial
+ionocyte	epithelial
+keratinocyte	epithelial
+kidney epithelial cell	epithelial
+lacrimal gland functional unit cell	stromal
+langerhans cell	immune
+large intestine goblet cell	epithelial
+leucocyte	immune
+limbal stem cell	epithelial
+limbal stromal cell	stromal
+liver dendritic cell	immune
+luminal cell of prostate epithelium	epithelial
+luminal epithelial cell of mammary gland	epithelial
+lung ciliated cell	epithelial
+lung microvascular endothelial cell	endothelial
+lymphatic endothelial cell	endothelial
+macrophage	immune
+mast cell	immune
+mature conventional dendritic cell	immune
+mature enterocyte	epithelial
+mature nk t cell	immune
+medullary thymic epithelial cell	epithelial
+melanocyte	stromal
+memory b cell	immune
+mesenchymal stem cell	stromal
+mesothelial cell	stromal
+microglial cell	immune
+monocyte	immune
+mucus secreting cell	epithelial
+muller cell	stromal
+muscle cell	stromal
+myeloid cell	immune
+myeloid dendritic cell	immune
+myeloid progenitor	immune
+myoepithelial cell	epithelial
+myofibroblast cell	stromal
+myometrial cell	stromal
+naive b cell	immune
+naive regulatory t cell	immune
+naive thymus-derived cd4-positive, alpha-beta t cell	immune
+naive thymus-derived cd8-positive, alpha-beta t cell	immune
+nampt neutrophil	immune
+neutrophil	immune
+nk cell	immune
+nkt cell	immune
+non-classical monocyte	immune
+ocular surface cell	epithelial
+pancreatic acinar cell	epithelial
+pancreatic alpha cell	epithelial
+pancreatic beta cell	epithelial
+pancreatic delta cell	epithelial
+pancreatic ductal cell	epithelial
+pancreatic pp cell	epithelial
+pancreatic stellate cell	stromal
+paneth cell of epithelium of large intestine	epithelial
+paneth cell of epithelium of small intestine	epithelial
+pericyte cell	stromal
+plasma cell	immune
+plasmablast	immune
+plasmacytoid dendritic cell	immune
+platelet	immune
+pulmonary ionocyte	epithelial
+radial glial cell	stromal
+regulatory t cell	immune
+respiratory goblet cell	epithelial
+respiratory mucous cell	epithelial
+retina horizontal cell	stromal
+retinal bipolar neuron	stromal
+retinal blood vessel endothelial cell	endothelial
+retinal ganglion cell	stromal
+retinal pigment epithelial cell	epithelial
+salivary gland cell	epithelial
+schwann cell	stromal
+secretory cell	epithelial
+serous cell of epithelium of bronchus	epithelial
+serous cell of epithelium of trachea	epithelial
+skeletal muscle satellite stem cell	stromal
+slow muscle cell	stromal
+small intestine goblet cell	epithelial
+smooth muscle cell	stromal
+sperm	germ line
+stromal cell	stromal
+t cell	immune
+t follicular helper cell	immune
+tendon cell	stromal
+thymocyte	immune
+tongue muscle cell	stromal
+tracheal goblet cell	epithelial
+transit amplifying cell of large intestine	epithelial
+transit amplifying cell of small intestine	epithelial
+type i nk t cell	immune
+type i pneumocyte	epithelial
+type ii pneumocyte	epithelial
+vascular associated smooth muscle cell	stromal
+vein endothelial cell	endothelial

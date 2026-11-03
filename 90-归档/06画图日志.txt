@@ -1,0 +1,16 @@
+[信息] 177 种细胞类型
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig1_strata.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig2_pca.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig3_heatmap.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig4_importance_age.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig5_tai_rank.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig7_pca_null_baseline.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig8_robustness_layers.png
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig9_shortprot_premise.png
+[信息] 数据源：远程切片 ts_slice.*
+[信息] 切片没有 UMAP 坐标，改用稀疏 SVD 的 PC1/PC2
+[完成] D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures\fig6_umap_tai.png
+
+==================================================
+图片输出目录：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\30-可视化\figures
+==================================================

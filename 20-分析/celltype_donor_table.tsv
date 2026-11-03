@@ -1,0 +1,178 @@
+cell_type	TSP1	TSP10	TSP11	TSP12	TSP13	TSP14	TSP15	TSP2	TSP3	TSP4	TSP5	TSP6	TSP7	TSP8	TSP9
+acinar cell of salivary gland	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+adipocyte	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0
+adventitial cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+alveolar fibroblast	170	0	0	0	0	0	0	30	0	0	0	0	0	0	0
+artery endothelial cell	0	0	0	0	0	138	0	0	0	0	0	0	0	0	0
+b cell	0	0	0	0	0	0	0	0	0	0	0	0	200	0	0
+basal cell	0	0	0	0	0	0	0	122	0	0	0	0	78	0	0
+basal cell of prostate epithelium	0	0	0	0	0	0	0	0	0	0	0	0	0	200	0
+basophil	167	10	0	0	0	9	0	4	0	0	0	0	7	3	0
+bladder urothelial cell	90	0	0	0	0	31	0	79	0	0	0	0	0	0	0
+bronchial smooth muscle cell	33	0	0	0	0	0	0	48	0	0	0	0	0	0	0
+bronchial vessel endothelial cell	0	0	0	0	0	47	0	0	0	0	0	0	0	0	0
+capillary aerocyte	63	0	0	0	0	0	0	137	0	0	0	0	0	0	0
+capillary endothelial cell	103	0	0	0	0	10	0	72	0	15	0	0	0	0	0
+cardiac endothelial cell	0	0	0	200	0	0	0	0	0	0	0	0	0	0	0
+cardiac muscle cell	0	0	0	200	0	0	0	0	0	0	0	0	0	0	0
+cd141-positive myeloid dendritic cell	0	16	0	0	0	42	0	86	0	0	0	0	39	1	0
+cd1c-positive myeloid dendritic cell	0	142	0	0	0	0	0	0	0	0	0	0	58	0	0
+cd24 neutrophil	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+cd4-positive alpha-beta t cell	0	0	0	0	0	141	0	0	0	0	0	0	59	0	0
+cd4-positive helper t cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+cd4-positive, alpha-beta memory t cell	0	0	0	0	0	12	0	104	0	0	0	0	84	0	0
+cd4-positive, alpha-beta t cell	11	0	17	0	0	104	0	60	0	0	0	0	8	0	0
+cd8-positive alpha-beta t cell	0	0	0	0	0	179	0	0	0	0	0	0	21	0	0
+cd8-positive, alpha-beta cytokine secreting effector t cell	0	0	0	0	0	0	0	0	0	0	0	0	200	0	0
+cd8-positive, alpha-beta cytotoxic t cell	0	87	0	0	0	113	0	0	0	0	0	0	0	0	0
+cd8-positive, alpha-beta memory t cell	0	31	0	0	0	138	0	12	0	0	0	0	19	0	0
+cd8-positive, alpha-beta t cell	0	0	29	0	0	74	0	40	0	38	0	0	19	0	0
+cd8b-positive nk t cell	0	0	0	0	0	0	0	0	0	0	0	0	0	200	0
+cell of skeletal muscle	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0
+ciliary body	0	0	0	0	0	0	15	0	0	0	2	0	0	0	0
+ciliated cell	0	0	0	0	0	0	0	2	0	0	0	198	0	0	0
+ciliated epithelial cell	0	0	0	0	0	0	0	0	0	31	0	0	0	0	0
+classical monocyte	0	96	0	0	0	30	0	7	0	0	0	0	67	0	0
+club cell	55	0	0	0	0	0	0	145	0	0	0	0	0	0	0
+club cell of prostate epithelium	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+conjunctival epithelial cell	0	0	0	0	0	0	0	0	200	0	0	0	0	0	0
+connective tissue cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+corneal epithelial cell	0	0	0	0	0	0	200	0	0	0	0	0	0	0	0
+corneal keratocyte	0	0	0	0	0	0	170	0	0	0	30	0	0	0	0
+dendritic cell	18	0	0	0	0	0	124	0	20	0	38	0	0	0	0
+dn1 thymic pro-t cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+dn3 thymocyte	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+dn4 thymocyte	0	0	0	0	0	32	0	0	0	0	0	0	0	0	0
+double-positive, alpha-beta thymocyte	0	0	0	0	0	0	0	0	0	0	0	6	0	0	0
+duct epithelial cell	0	0	0	0	0	198	0	0	0	0	0	0	2	0	0
+duodenum glandular cell	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0
+endothelial cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+endothelial cell of artery	4	0	0	0	0	20	0	6	0	163	0	0	7	0	0
+endothelial cell of hepatic sinusoid	0	0	0	0	0	2	0	0	0	0	0	198	0	0	0
+endothelial cell of lymphatic vessel	8	0	0	0	0	26	0	2	0	87	0	0	77	0	0
+endothelial cell of vascular tree	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+enterocyte of epithelium of large intestine	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+enterocyte of epithelium of small intestine	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+epithelial cell	0	0	0	0	0	0	0	0	0	0	0	0	200	0	0
+epithelial cell of lacrimal sac	0	0	0	0	0	0	0	0	0	0	52	0	0	0	0
+epithelial cell of uterus	0	0	0	0	0	0	0	0	0	194	0	0	0	0	0
+erythrocyte	0	0	0	0	0	7	0	0	0	0	0	0	193	0	0
+erythroid lineage cell	0	0	0	0	0	0	19	0	2	0	9	0	0	0	0
+erythroid progenitor	0	0	33	0	24	79	0	64	0	0	0	0	0	0	0
+eye photoreceptor cell	0	0	0	0	0	0	113	0	0	0	87	0	0	0	0
+fast muscle cell	92	0	0	0	0	44	0	5	0	59	0	0	0	0	0
+fibroblast	0	63	0	0	0	0	0	18	0	119	0	0	0	0	0
+fibroblast of breast	0	0	0	0	0	0	0	0	0	200	0	0	0	0	0
+fibroblast of cardiac tissue	0	0	0	200	0	0	0	0	0	0	0	0	0	0	0
+goblet cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+granulocyte	0	0	77	0	2	71	0	50	0	0	0	0	0	0	0
+gut endothelial cell	0	0	0	0	0	46	0	53	0	0	0	0	0	0	0
+hematopoietic stem cell	0	0	44	0	55	37	0	64	0	0	0	0	0	0	0
+hepatocyte	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+hillock cell of prostate epithelium	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+hillock-club cell of prostate epithelium	0	0	0	0	0	0	0	0	0	0	0	0	0	200	0
+immature enterocyte	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+immature natural killer cell	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0
+immune cell	0	0	0	0	0	0	0	0	0	0	0	0	200	0	0
+innate lymphoid cell	0	0	0	0	0	137	0	11	0	0	0	0	52	0	0
+intermediate monocyte	0	0	0	0	0	0	0	28	0	0	0	0	172	0	0
+intestinal crypt stem cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+intestinal crypt stem cell of large intestine	0	0	0	0	0	114	0	0	0	0	0	0	0	0	0
+intestinal crypt stem cell of small intestine	0	0	0	0	0	71	0	0	0	0	0	0	0	0	0
+intestinal enteroendocrine cell	0	0	0	0	0	31	0	82	0	0	0	0	0	0	0
+intestinal tuft cell	0	0	0	0	0	158	0	35	0	0	0	0	0	0	0
+intrahepatic cholangiocyte	0	0	0	0	0	31	0	0	0	0	0	11	0	0	0
+ionocyte	0	0	0	0	0	87	0	0	0	0	0	13	0	0	0
+keratinocyte	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+kidney epithelial cell	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+lacrimal gland functional unit cell	0	0	0	0	0	0	84	0	108	0	8	0	0	0	0
+langerhans cell	0	19	0	0	0	17	0	0	0	0	0	0	0	0	0
+large intestine goblet cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+leucocyte	0	157	0	0	0	3	0	0	0	0	0	0	0	0	0
+limbal stem cell	0	0	0	0	0	0	124	0	4	0	16	0	0	0	0
+limbal stromal cell	0	0	0	0	0	0	52	0	1	0	22	0	0	0	0
+liver dendritic cell	0	0	0	0	0	0	0	0	0	0	0	34	0	0	0
+luminal cell of prostate epithelium	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+luminal epithelial cell of mammary gland	0	0	0	0	0	0	0	0	0	200	0	0	0	0	0
+lung ciliated cell	192	0	0	0	0	0	0	8	0	0	0	0	0	0	0
+lung microvascular endothelial cell	22	0	0	0	0	0	0	178	0	0	0	0	0	0	0
+lymphatic endothelial cell	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0
+macrophage	200	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+mast cell	51	136	0	0	0	0	0	3	0	0	0	0	10	0	0
+mature conventional dendritic cell	0	0	0	0	0	15	0	0	0	0	0	0	2	0	0
+mature enterocyte	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+mature nk t cell	99	0	0	0	0	9	0	92	0	0	0	0	0	0	0
+medullary thymic epithelial cell	0	0	0	0	0	140	0	26	0	0	0	0	0	0	0
+melanocyte	0	61	0	0	0	0	79	0	0	0	60	0	0	0	0
+memory b cell	0	0	0	0	0	0	0	146	0	0	0	0	54	0	0
+mesenchymal stem cell	0	0	0	0	0	128	0	42	0	30	0	0	0	0	0
+mesothelial cell	10	0	0	0	0	11	0	19	0	1	0	0	0	0	0
+microglial cell	0	0	0	0	0	0	54	0	25	0	121	0	0	0	0
+monocyte	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+mucus secreting cell	0	0	0	0	0	0	0	0	0	0	0	64	0	0	0
+muller cell	0	0	0	0	0	0	196	0	0	0	4	0	0	0	0
+muscle cell	0	180	0	0	0	20	0	0	0	0	0	0	0	0	0
+myeloid cell	0	0	0	0	0	0	0	0	0	0	0	0	0	0	200
+myeloid dendritic cell	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0
+myeloid progenitor	0	0	14	0	8	167	0	11	0	0	0	0	0	0	0
+myoepithelial cell	0	0	0	0	0	192	0	0	0	0	0	0	4	0	0
+myofibroblast cell	32	48	0	0	0	91	0	29	0	0	0	0	0	0	0
+myometrial cell	0	0	0	0	0	0	0	0	0	199	0	0	0	0	0
+naive b cell	3	34	0	0	0	0	0	60	0	0	0	0	103	0	0
+naive regulatory t cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+naive thymus-derived cd4-positive, alpha-beta t cell	0	0	0	0	0	11	0	138	0	0	0	0	51	0	0
+naive thymus-derived cd8-positive, alpha-beta t cell	0	30	0	0	0	2	0	42	0	0	0	0	126	0	0
+nampt neutrophil	0	0	48	0	14	129	0	9	0	0	0	0	0	0	0
+neutrophil	0	0	0	0	0	15	0	0	0	0	0	0	19	166	0
+nk cell	0	51	3	0	0	25	0	72	0	0	0	3	46	0	0
+nkt cell	0	175	0	0	0	12	0	0	0	0	0	0	0	13	0
+non-classical monocyte	84	3	0	0	0	18	0	77	0	0	0	0	18	0	0
+ocular surface cell	0	0	0	0	0	0	48	0	0	0	6	0	0	0	0
+pancreatic acinar cell	200	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+pancreatic alpha cell	71	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+pancreatic beta cell	82	0	0	0	0	0	0	0	0	0	0	0	0	0	17
+pancreatic delta cell	9	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+pancreatic ductal cell	176	0	0	0	0	0	0	0	0	0	0	0	0	0	24
+pancreatic pp cell	71	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+pancreatic stellate cell	0	0	0	0	0	0	0	0	0	0	0	0	0	0	200
+paneth cell of epithelium of large intestine	0	0	0	0	0	192	0	8	0	0	0	0	0	0	0
+paneth cell of epithelium of small intestine	0	0	0	0	0	8	0	192	0	0	0	0	0	0	0
+pericyte cell	39	0	0	0	0	115	0	12	0	28	0	0	6	0	0
+plasma cell	10	0	118	0	24	37	0	5	0	0	0	0	6	0	0
+plasmablast	7	0	1	0	2	0	0	4	0	0	0	0	0	0	0
+plasmacytoid dendritic cell	36	1	0	0	0	38	0	6	0	0	0	0	15	0	0
+platelet	0	21	0	0	0	33	0	2	0	0	0	0	143	1	0
+pulmonary ionocyte	0	0	0	0	0	0	0	19	0	0	0	0	0	0	0
+radial glial cell	0	0	0	0	0	0	180	0	1	0	14	0	0	0	0
+regulatory t cell	0	2	0	0	0	42	0	10	0	0	0	0	146	0	0
+respiratory goblet cell	172	0	0	0	0	0	0	28	0	0	0	0	0	0	0
+respiratory mucous cell	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0
+retina horizontal cell	0	0	0	0	0	0	3	0	0	0	3	0	0	0	0
+retinal bipolar neuron	0	0	0	0	0	0	16	0	1	0	17	0	0	0	0
+retinal blood vessel endothelial cell	0	0	0	0	0	0	176	0	2	0	22	0	0	0	0
+retinal ganglion cell	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0
+retinal pigment epithelial cell	0	0	0	0	0	0	0	0	0	0	49	0	0	0	0
+salivary gland cell	0	0	0	0	0	45	0	0	0	0	0	0	0	0	0
+schwann cell	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0
+secretory cell	0	0	0	0	0	0	0	21	0	0	0	179	0	0	0
+serous cell of epithelium of bronchus	6	0	0	0	0	0	0	9	0	0	0	0	0	0	0
+serous cell of epithelium of trachea	0	0	0	0	0	0	0	0	0	0	0	41	0	0	0
+skeletal muscle satellite stem cell	8	0	0	0	0	58	0	120	0	14	0	0	0	0	0
+slow muscle cell	65	0	0	0	0	29	0	25	0	44	0	0	0	0	0
+small intestine goblet cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+smooth muscle cell	0	0	0	10	0	178	0	12	0	0	0	0	0	0	0
+sperm	0	0	0	0	0	11	0	0	0	0	0	0	0	0	0
+stromal cell	0	60	0	0	0	140	0	0	0	0	0	0	0	0	0
+t cell	0	15	0	0	0	15	0	0	6	154	10	0	0	0	0
+t follicular helper cell	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+tendon cell	147	0	0	0	0	47	0	0	0	6	0	0	0	0	0
+thymocyte	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0
+tongue muscle cell	0	0	0	0	0	52	0	0	0	1	0	0	7	0	0
+tracheal goblet cell	0	0	0	0	0	0	0	0	0	0	0	77	0	0	0
+transit amplifying cell of large intestine	0	0	0	0	0	52	0	148	0	0	0	0	0	0	0
+transit amplifying cell of small intestine	0	0	0	0	0	127	0	73	0	0	0	0	0	0	0
+type i nk t cell	0	0	0	0	0	107	0	0	0	0	0	0	93	0	0
+type i pneumocyte	147	0	0	0	0	0	0	53	0	0	0	0	0	0	0
+type ii pneumocyte	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0
+vascular associated smooth muscle cell	0	0	0	0	0	67	0	69	0	64	0	0	0	0	0
+vein endothelial cell	15	0	0	0	0	148	0	23	0	14	0	0	0	0	0

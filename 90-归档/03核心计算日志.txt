@@ -1,0 +1,101 @@
+[信息] 数据源：远程切片 ts_slice.*
+[信息] 线粒体基因 37 个
+[信息] 表达矩阵基因命中：16,177 / 58,604 = 27.6%
+[信息] 年龄表基因覆盖率：16,177 / 17,318 = 93.4%   ← 验收指标
+[信息] 按层命中率：最低 S15（377 个基因，命中 242，64.2%）
+[信息]   S1:95%  S2:93%  S3:94%  S4:94%  S5:94%  S6:95%  S7:94%  S8:95%  S9:93%  S10:95%  S11:96%  S12:93%  S13:94%  S14:84%  S15:64%  S16:69%
+[信息] 年龄层指示矩阵：58,604 基因 × 16 层，非零 16,177
+[信息] 全量：28,017 细胞 × 58,604 基因
+[信息] 抽样后 28,017 个细胞，177 种类型
+[信息] 分块 20,000/批，共 2 批
+[信息]   批 1/2：20,000 → 保留 15,910
+[信息]   批 2/2：8,017 → 保留 6,285
+[信息] QC 通过 22,195 / 28,017 = 79.2%
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\qc_passed_rows.npy  (22,195 个 QC 通过细胞的行索引)
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\celltype_mean_expr.tsv  (177 类型 × 58604 基因)
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\lineage_map.tsv  (177 类，5 个区室)
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\celltype_donor_table.tsv
+[信息] 表达矩阵基因命中：16,177 / 58,604 = 27.6%
+[信息] 年龄表基因覆盖率：16,177 / 17,318 = 93.4%   ← 验收指标
+[信息] 按层命中率：最低 S15（377 个基因，命中 242，64.2%）
+[信息]   S1:95%  S2:93%  S3:94%  S4:94%  S5:94%  S6:95%  S7:94%  S8:95%  S9:93%  S10:95%  S11:96%  S12:93%  S13:94%  S14:84%  S15:64%  S16:69%
+[信息] 计算年龄构成与 TAI……
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\cell_tai.tsv
+[完成] 已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\celltype_age_profile.tsv
+
+==============================================================
+稳健性检验：只保留高命中层（命中率 ≥ 80%）后重算 TAI
+==============================================================
+  保留的层：[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+  剔除的层：[15, 16]（命中率 S15:64%, S16:69%）
+  Spearman ρ = 0.9883   Kendall τ = 0.9518
+  最古老 Top10 重合 9/10
+  TAI 绝对差：中位 0.0361
+  排名变动：141/177 个类型名次有变化，最大位移 88 位
+    Top10 掉出：['cardiac muscle cell']
+    Top10 换入：['pancreatic acinar cell']
+  偏倚同质性检验：ΔTAI 对「该类型的 S15+S16 表达占比」回归 r = 0.9996，R² = 0.9992
+    → 偏倚**完全由该类型自身表达的年轻层基因量驱动**，是类型特异的，不能假定它对所有类型抵消。
+  已写出：D:\Codes\WorkPlace\WorkBuddy\10-课程\生物信息学\项目-细胞地层\20-分析\celltype_age_profile_highhit.tsv
+  → 整体排序高度一致（但仍不等于逐个类型不变，见上面的排名变动）。
+
+==============================================================
+自检
+==============================================================
+  细胞类型数：177
+  年龄层数：16
+  用到的基因数：16,177
+  每行占比之和：1.000000 – 1.000000  ✓
+  TAI 范围：3.21 – 4.42
+  TAI 中位数：3.76
+  总表达量范围：270.5 – 3158.0
+    逐细胞 TAI：22,195 个细胞；类型内 SE 中位数 0.0111；供者层面 SE 中位 0.0417（细胞层面 0.0111，低估 3.75 倍）；81 个类型只有 1 个供者，无法估计跨供者不确定性；信号/噪声：细胞层面 16.3 倍，供者层面 4.3 倍；与细胞级 TAI 均值最大差 0.0503（Δ 的 SD 0.0124，是类型内 SE 中位 0.0111 的 1.1 倍；Δ 与 TAI 相关 r=0.384，属系统性偏移而非随机抖动——两者是不同的估计量，不可互换）
+  TAI 标准误：中位数 0.0111，最大 0.1323（← enterocyte of epithelium of small intestine, n=5）
+  ⚠️ 1 个类型无法计算标准误（细胞数过少，SE 为 NaN）：intestinal crypt stem cell of large intestine
+  信号/噪声：TAI 跨类型标准差 0.1810 ÷ 类型内 SE 中位数 0.0111 = 16.3 倍  → 类型间差异远大于细胞间噪声
+  低置信类型（QC 后细胞数 < 20）：25 类，其 TAI 只作参考，不进入结论
+
+  ── 最古老（TAI 最小）的 10 种 ──
+      3.21  erythroid progenitor
+      3.27  kidney epithelial cell
+      3.30  plasmablast
+      3.34  myeloid progenitor
+      3.36  fast muscle cell
+      3.38  retinal ganglion cell
+      3.39  adipocyte
+      3.40  transit amplifying cell of large intestine
+      3.40  transit amplifying cell of small intestine
+      3.41  cardiac muscle cell
+
+  ── 最年轻（TAI 最大）的 10 种 ──
+      4.42  nampt neutrophil
+      4.30  neutrophil
+      4.12  cd24 neutrophil
+      4.10  capillary aerocyte
+      4.10  erythroid lineage cell
+      4.08  endothelial cell
+      4.05  epithelial cell of lacrimal sac
+      4.01  immune cell
+      4.00  erythrocyte
+      4.00  capillary endothelial cell
+
+  年龄层图例：
+    S 1  Cellular organisms 细胞生物
+    S 2  Eukaryota 真核生物
+    S 3  Opisthokonta 后鞭毛类
+    S 4  Metazoa 后生动物
+    S 5  Eumetazoa 真后生动物
+    S 6  Bilateria 两侧对称动物
+    S 7  Chordata 脊索动物
+    S 8  Euteleostomi 硬骨脊椎动物
+    S 9  Amniota 羊膜动物
+    S10  Mammalia 哺乳纲
+    S11  Theria 兽亚纲
+    S12  Eutheria 真兽下纲
+    S13  Euarchontoglires 灵长总目
+    S14  Catarrhini 狭鼻小目
+    S15  Homininae 人亚科
+    S16  Homo sapiens 智人
+
+  下一步：python 04_无监督分析.py
+==============================================================

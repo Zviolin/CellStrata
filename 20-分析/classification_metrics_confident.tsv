@@ -1,0 +1,2 @@
+tag	n_cells	n_types_all	n_types_train	n_types_test	n_unseen_classes	n_unseen_cells	pct_unseen_cells	accuracy	accuracy_ceiling	pct_of_ceiling	macro_f1_test	macro_f1_all	rand_baseline_test	majority_baseline	x_majority	n_features	n_donors_train	n_donors_test	n_cells_train	n_cells_test
+confident	22195	177	149	103	28	3109	0.4049	0.1801	0.5951	0.3026	0.194	0.1129	0.0097	0.026	6.92	905	11	4	14516	7679

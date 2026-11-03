@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "如引用本项目，请使用下列信息。"
+title: "CellStrata：人体 177 种细胞类型的系统发育地层学分析"
+abstract: >-
+  以 Tabula Sapiens 1.0 的 28,017 个单细胞为样本，把 Trigos et al. (2017) 的
+  16 层系统发育分层方案与单细胞表达谱结合，在细胞类型粒度上计算转录组年龄指数
+  （TAI），并用超几何双单尾检验、BH-FDR 校正、按供者划分的随机森林与 PCA
+  受控零假设基线检验"细胞身份是否携带基因年龄信息"这一假设。
+authors:
+  - family-names: 张
+    given-names: 伟林
+    affiliation: "福州大学 计算机与大数据学院"
+version: 1.2.0
+date-released: "2026-11-04"
+license: MIT
+repository-code: "https://github.com/Zviolin/CellStrata"
+keywords:
+  - 单细胞转录组
+  - 系统发育地层学
+  - 转录组年龄指数
+  - 细胞类型演化
+  - Tabula Sapiens
+  - phylostratigraphy
+  - single-cell transcriptomics
+type: software

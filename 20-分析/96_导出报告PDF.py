@@ -38,6 +38,8 @@ FIG_ORDER = [
     (3, "fig3_heatmap.png", "图 3  细胞类型 × 年龄层的表达占比热图"),
     (4, "fig4_importance_age.png", "图 4  各年龄层基因数与 Top 500 重要基因的富集倍数"),
     (5, "fig5_tai_rank.png", "图 5  177 种细胞类型的 TAI 排序与双口径误差棒"),
+    (6, "fig6_umap_tai.png", "图 6  细胞的 PC1/PC2 投影，按所属细胞类型的 TAI 着色"
+                             "（切片源无 UMAP 坐标，用稀疏 SVD 的 PC1/PC2 代替）"),
     (7, "fig7_pca_null_baseline.png", "图 7  PCA 零假设诊断：三条基线对比"),
     (8, "fig8_robustness_layers.png", "图 8  三重稳健性逐层对照"),
     (9, "fig9_shortprot_premise.png", "图 9  短蛋白前提检验"),
@@ -89,11 +91,131 @@ figcaption { font-size: 9pt; color: #555; margin-top: 0.45em; text-align: center
              font-style: normal; }
 strong { font-weight: bold; }
 a { color: #1a4d8f; text-decoration: none; }
+.math { text-align: center; margin: 0.85em 0; font-family: "Cambria Math", "Times New Roman", serif;
+        font-size: 10.5pt; }
+.math sub, .math sup { font-size: 78%; }
+.mono-inline { font-family: "Cambria Math", "Times New Roman", serif; }
 """
+
+
+# =====================================================================
+#  极简 LaTeX → HTML 公式转换
+#  报告里的公式只有 \frac / \sum / \text / \mathrm / \ge / \le / \cdot 这几类，
+#  而 Word 的 HTML 导入器不认 MathML、也装不了 MathJax（离线备份场景），
+#  所以在这里就把公式降级成"带括号的分式 + 上下标"，保证任何环境都能读。
+#  ⚠ 一旦报告新增复杂公式（矩阵、开方、多层分式嵌套），这里必须同步扩展，
+#    否则会退化成原样输出 LaTeX 源码——这正是修复前 PDF 里出现 `$$ ... $$` 的原因。
+# =====================================================================
+_SYMBOLS = {
+    r"\ge": "\u2265", r"\le": "\u2264", r"\cdot": "\u00b7",
+    r"\times": "\u00d7", r"\in": "\u2208", r"\pm": "\u00b1",
+    r"\approx": "\u2248", r"\to": "\u2192", r"\qquad": "\u2003\u2003",
+    r"\quad": "\u2003", r"\%": "%", r"\,": "\u2009", r"\;": "\u2005",
+    r"\alpha": "\u03b1", r"\beta": "\u03b2", r"\rho": "\u03c1",
+    r"\Delta": "\u0394", r"\sigma": "\u03c3",
+}
+
+
+def _take_group(s, i):
+    """从 s[i] 起取一个 {...} 组（或单个字符），返回 (内容, 结束位置)。"""
+    while i < len(s) and s[i] == " ":
+        i += 1
+    if i >= len(s):
+        return "", i
+    if s[i] != "{":
+        return s[i], i + 1
+    depth, j = 0, i
+    while j < len(s):
+        if s[j] == "{":
+            depth += 1
+        elif s[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return s[i + 1:j], j + 1
+        j += 1
+    return s[i + 1:], len(s)
+
+
+def latex_to_html(s):
+    """把一段行内/行间 LaTeX 转成 Word 能显示的 HTML 片段。"""
+    out = []
+    i = 0
+    n = len(s)
+    while i < n:
+        if s.startswith(r"\frac", i):
+            num, i = _take_group(s, i + 5)
+            den, i = _take_group(s, i)
+            out.append("(" + latex_to_html(num) + ")/(" + latex_to_html(den) + ")")
+        elif s.startswith(r"\sum", i):
+            i += 4
+            sub = sup = ""
+            for _ in range(2):
+                while i < n and s[i] == " ":
+                    i += 1
+                if i < n and s[i] == "_":
+                    sub, i = _take_group(s, i + 1)
+                elif i < n and s[i] == "^":
+                    sup, i = _take_group(s, i + 1)
+            frag = "\u03a3"
+            if sub:
+                frag += "<sub>" + latex_to_html(sub) + "</sub>"
+            if sup:
+                frag += "<sup>" + latex_to_html(sup) + "</sup>"
+            out.append(frag)
+        elif (s.startswith(r"\text", i) or s.startswith(r"\mathrm", i)
+              or s.startswith(r"\mathbf", i) or s.startswith(r"\mathit", i)):
+            for cmd in (r"\mathbf", r"\mathrm", r"\mathit", r"\text"):
+                if s.startswith(cmd, i):
+                    body, i = _take_group(s, i + len(cmd))
+                    txt = latex_to_html(body)
+                    out.append(f"<b>{txt}</b>" if cmd == r"\mathbf" else txt)
+                    break
+        elif s[i] == "\\":
+            for sym in sorted(_SYMBOLS, key=len, reverse=True):
+                if s.startswith(sym, i):
+                    out.append(_SYMBOLS[sym])
+                    i += len(sym)
+                    break
+            else:                      # 未知命令：去掉反斜杠保留名字
+                j = i + 1
+                while j < n and (s[j].isalpha() or s[j] == "\\"):
+                    j += 1
+                out.append(s[i + 1:j])
+                i = j
+        elif s[i] in "_^":
+            tag = "sub" if s[i] == "_" else "sup"
+            body, i = _take_group(s, i + 1)
+            # ⚠ Word 不支持嵌套上/下标（<sub><sub>…</sub></sub> 会排错），
+            #   故先把内层的 sub/sup 标签压平，只保留文字。
+            inner = re.sub(r"</?su[bp]>", "", latex_to_html(body))
+            out.append(f"<{tag}>{inner}</{tag}>")
+        elif s[i] == "{":
+            body, i = _take_group(s, i)
+            out.append(latex_to_html(body))
+        else:
+            out.append(s[i])
+            i += 1
+    return "".join(out)
+
+
+def convert_math(md_text):
+    """把 Markdown 里的 $$...$$ 与 $...$ 换成 HTML（必须在 markdown 解析前做）。"""
+    md_text = re.sub(
+        r"^\$\$\s*\n(.+?)\n\s*\$\$$",
+        lambda m: '\n<div class="math">%s</div>\n' % latex_to_html(m.group(1)),
+        md_text, flags=re.S | re.M)
+    md_text = re.sub(
+        r"(?<![\\$])\$(?!\$)([^$\n]+?)(?<!\\\$)\$(?!\$)",
+        lambda m: latex_to_html(m.group(1)),
+        md_text)
+    return md_text
 
 
 def build_html(md_text: str) -> str:
     """Markdown → HTML，并把图片内嵌进去。"""
+    # ⚠ 公式必须在 markdown 解析**之前**降级：否则 $$...$$ 会原样穿过管道，
+    #    Word 把它当普通文本排进 PDF（修复前实测第 15 页直接印出了 \frac 源码）。
+    md_text = convert_math(md_text)
     html = markdown.markdown(
         md_text,
         extensions=["tables", "fenced_code", "codehilite", "toc",
@@ -119,8 +241,13 @@ def build_html(md_text: str) -> str:
         #   Word 的 HTML 导入器不认 CSS 的 max-width，超宽图会被直接裁掉
         #   （实测图 10 右半幅被切）。正文宽 21 - 2*2.0 = 17 cm ≈ 643 px，
         #   取 620 px 留一点余量。
-        block = (f'<figure><img src="{rel}" width="620" '
-                 f'alt="图 {num}"/><figcaption>{cap}</figcaption></figure>')
+        # ⚠ 不要用 <figure>/<figcaption>：Word 的 HTML 导入器不认这两个标签，
+        #    会把图注拆成两个段落（实测图 1 的"图"被单独挤到一行、其余文字另起一段）。
+        #    改用两个带内联样式的 <p>，Word 对 <p> 的解析一直可靠。
+        block = (f'<p class="figimg" style="text-align:center;margin:11pt 0 0 0;">'
+                 f'<img src="{rel}" width="620" alt="图 {num}"/></p>'
+                 f'<p class="figcap" style="text-align:center;font-size:9pt;'
+                 f'color:#555;margin:3pt 0 13pt 0;">{cap}</p>')
         # 定位策略：找**最后一个**提到"图 N"的**块级元素**（p / li / h2 / h3 / h4），
         # 把图插在它之后。
         # ⚠ 不能用简单的 "<p>...图 N...</p>" 正则：markdown 转换后正文里是
@@ -145,11 +272,11 @@ def build_html(md_text: str) -> str:
             # ⚠ 只在**同一个锚点之后**才调整顺序：必须校验 nxt > pos。
             #    否则当锚点位置比已插入的 figure 更靠后时，html[pos:nxt] 是空串，
             #    len < 400 成立 → pos 被错误地前移，图 10 被插到图 1 之前。
-            tag = '<figure><img src="'
+            tag = '<p class="figimg"'
             nxt = html.find(tag, pos)
             while nxt != -1:
                 between = html[pos:nxt]
-                if len(between) < 400 and "figure" not in between:
+                if len(between) < 420 and "figimg" not in between:
                     pos = nxt
                     break
                 nxt = html.find(tag, nxt + 1)

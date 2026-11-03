@@ -46,3 +46,8 @@ Thumbs.db
 
 # 报告导 PDF 的中间 HTML（可由 96_导出报告PDF.py 重新生成）
 40-报告/_report_preview.html
+
+# 版面核对用的临时渲染图（我自己看 PDF 时导出的，可随时重建）
+*/_chk/
+40-报告/_chk/
+50-论文/_chk/

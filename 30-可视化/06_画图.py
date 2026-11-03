@@ -68,8 +68,9 @@ def fig1(prof):
     ax.set_ylim(0, 1)
     ax.set_ylabel("表达占比")
     ax.set_xlabel("细胞类型（按 TAI 排序：左=古老，右=年轻）")
-    ax.set_title(f"图1  细胞地层柱：{len(prof)} 种细胞类型的基因年龄构成"
-                 f"（黑线为 TAI）")
+    # ⚠ 图内不再放标题：期刊体例下图题由 LaTeX 图注承担，
+    #    图内再写一遍会与图注重复，且长标题会把画布撑宽、正文里被压成微缩字。
+    ax.set_title("")
 
     # 每隔若干个标一个类型名，否则 177 个标签完全重叠
     step = max(1, len(prof) // 22)
@@ -115,7 +116,7 @@ def fig2():
 
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
-    ax.set_title("图2  仅凭基因年龄构成，细胞类型能否分开")
+    ax.set_title("")
     ax.grid(alpha=0.2)
     out = os.path.join(FIG_DIR, "fig2_pca.png")
     fig.savefig(out)
@@ -138,10 +139,7 @@ def fig3(prof):
     # 配色语义必须写清楚，否则读者会误读：
     # RdYlBu_r 是「红→黄→蓝」，红端=数值大=占比高。
     # 由于 S1 最古老、S16 最新，**红色端对应古老层**（不是"年轻"）。
-    ax.set_title("图3  细胞类型 × 年龄层构成热图\n"
-                 "（颜色 = 该层基因的表达占比；红=占比高、蓝=占比低。"
-                 "注意 S1 在最左、S16 在最右，**红色端靠左代表古老层**）",
-                 fontsize=10)
+    ax.set_title("")
     fig.colorbar(im, ax=ax, label="表达占比", pad=0.01, aspect=30)
     out = os.path.join(FIG_DIR, "fig3_heatmap.png")
     fig.savefig(out)
@@ -170,10 +168,7 @@ def fig4():
            label="背景（全部 HVG）", width=0.8)
     a1.set_ylabel("基因数")
     a1.set_yscale("log")
-    a1.set_title("图4  区分细胞类型的基因，偏向哪个年代\n"
-                 f"（上：各年龄层在背景 HVG 中的基因数，对数轴；"
-                 f"下：Top 重要基因的富集倍数，红色=BH 校正后显著富集，"
-                 f"蓝色=BH 校正后显著耗竭，★/▼ = q < 0.05）")
+    a1.set_title("")
     a1.legend(fontsize=8)
 
     sub = enr[ok_mask].copy()
@@ -302,7 +297,7 @@ def fig5(prof):
                      f"只画了浅色对照棒")
     if note:
         note += "）"
-    ax.set_title("图5  细胞类型的转录组年龄排序" + note, fontsize=10)
+    ax.set_title("")
     out = os.path.join(FIG_DIR, "fig5_tai_rank.png")
     fig.savefig(out)
     plt.close(fig)
@@ -366,7 +361,7 @@ def fig6(prof, group_key="cell_type", max_points=80000):
     cb.set_label("TAI（越小越古老）")
     ax.set_xlabel(ax_names[0])
     ax.set_ylabel(ax_names[1])
-    ax.set_title(f"图6  细胞图谱上的转录组年龄（{len(prof)} 种细胞类型，{emb_note} 坐标）")
+    ax.set_title("")
     ax.set_xticks([])
     ax.set_yticks([])
     out = os.path.join(FIG_DIR, "fig6_umap_tai.png")
@@ -522,10 +517,7 @@ def fig8():
         if i is not None:
             ax.axvspan(i - 0.45, i - 0.34, color="#4c72b0", alpha=0.45, zorder=0)
 
-    ax.set_title("图8  三重稳健性检验的逐层对照\n"
-                 "（★ = BH 校正后显著富集，▼ = 显著耗竭，灰色 = 不显著；"
-                 "左缘深色标 = 三次运行共同显著的层：富集 S8、S10，耗竭 S2）",
-                 fontsize=10)
+    ax.set_title("")
     ax.legend(handles=handles, fontsize=8)
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
@@ -588,11 +580,8 @@ def fig9():
                  "（越年轻 → 序列越短，与左图同向）", fontsize=10)
     a2.grid(alpha=0.25)
 
-    fig.suptitle("图9  前提检验：短蛋白是否真的集中在年轻层？"
-                 "（层号 vs 短蛋白占比 Spearman ρ = +0.871）\n"
-                 "注：偏倚是「已经发生」在 Trigos 年龄表里的；检验 C 是保守性压力测试，"
-                 "不能修复既有偏倚", fontsize=10)
-    fig.tight_layout(rect=[0, 0, 1, 0.88])
+    fig.suptitle("")
+    fig.tight_layout()
     out = os.path.join(FIG_DIR, "fig9_shortprot_premise.png")
     fig.savefig(out, dpi=180)
     plt.close(fig)

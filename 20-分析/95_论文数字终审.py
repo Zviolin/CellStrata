@@ -25,6 +25,8 @@
     python 95_论文数字终审.py
 """
 
+import glob
+import io
 import os
 import re
 import sys
@@ -33,7 +35,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import ANALYSIS_DIR  # noqa: E402
+from common import ROOT, ANALYSIS_DIR  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAPER = os.path.join(ROOT, "50-论文", "main.tex")
@@ -331,8 +333,17 @@ def main():
               decimals=1)
 
     # ================= I. 结构一致性 =================
-    paper_has("论文提到脚本总数", paper, "19 个 Python 脚本")
-    paper_has("论文提到代码行数", paper, "6,783")
+    # ⚠ 脚本数与代码行数**从磁盘实算**，不写死字面量：
+    #   写死会让论文在每次改动代码后静默过期（本项目真实发生过——
+    #   新增 95/96 两个脚本后，论文仍写着旧的 6,783 行 / 19 脚本）。
+    _py = sorted(glob.glob(os.path.join(ROOT, "20-分析", "*.py"))
+                 + glob.glob(os.path.join(ROOT, "30-可视化", "*.py")))
+    _n_script = len(_py)
+    _n_line = sum(len(io.open(f, encoding="utf-8", errors="ignore")
+                      .read().splitlines()) for f in _py)
+    check("脚本数与磁盘一致", str(_n_script), "20")
+    paper_has("论文提到脚本总数", paper, f"{_n_script} 个 Python 脚本")
+    paper_has("论文提到代码行数", paper, f"{_n_line:,}")
     paper_has("论文提到断言数", paper, "239")
     paper_has("论文提到终审脚本", paper, "07_终审核对.py")
     paper_has("论文提到论文终审脚本", paper, "95_论文数字终审.py")

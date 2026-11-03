@@ -7,7 +7,7 @@
 
 🔗 **仓库**：https://github.com/Zviolin/CellStrata
 📄 **实验报告（PDF，59 页）**：[`40-报告/01-实验报告.pdf`](40-报告/01-实验报告.pdf)
-📄 **LaTeX 论文（PDF，18 页）**：[`50-论文/main.pdf`](50-论文/main.pdf)　｜　[源码 `main.tex`](50-论文/main.tex)
+📄 **LaTeX 论文（PDF，13 页，中文期刊版式）**：[`50-论文/main.pdf`](50-论文/main.pdf)　｜　[源码 `main.tex`](50-论文/main.tex)
 
 ---
 

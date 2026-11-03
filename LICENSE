@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-数据来源与致谢：
-- Tabula Sapiens 1.0（The Tabula Sapiens Consortium, Science 2020）—— CC BY 4.0
-  本仓库不包含原始数据，仅包含由脚本远程切片得到的分析结果。
-- Trigos et al. 2017 (PNAS) 基因年龄表
-- Liebeskind et al. 2016 (GBE) 13 算法共识表
-- UniProt 蛋白长度

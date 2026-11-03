@@ -381,6 +381,25 @@ bash 90-归档/回归脚本.sh                  # 再跑 10 步全链路 + 终�
 
 ---
 
+## 许可与数据来源
+
+- **代码与文档**：MIT License（见 [`LICENSE`](LICENSE)）。
+- **原始数据不在本仓库内**。本仓库只包含脚本、分析结果表、图与报告；
+  表达矩阵（185 MB 切片、93 MB 类型均值矩阵）由脚本远程重新获取。
+- 数据来源与授权：
+
+| 数据 | 来源 | 许可 |
+|---|---|---|
+| Tabula Sapiens 1.0 单细胞图谱 | The Tabula Sapiens Consortium, *Science* 369(6506):489–497, 2020（CELLxGENE Discover） | CC BY 4.0 |
+| 16 层基因年龄表 | Trigos et al., *PNAS* 114(28):E6473–E6482, 2017 | 学术使用 |
+| 13 算法共识表 | Liebeskind et al., *Genome Biology and Evolution* 8(11):3065–3072, 2016 | 学术使用 |
+| 蛋白长度 | UniProt REST API | CC BY 4.0 |
+
+本项目为福州大学《生物信息学》课程的个人独立作业，**未接受外部资助，不作商业用途**。
+如引用请使用 [`CITATION.cff`](CITATION.cff)。
+
+---
+
 ## 当前进度
 
 - [x] 立项书 v1.3（含 v1.2→v1.3 口径变更对照表）

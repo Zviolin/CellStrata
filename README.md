@@ -7,7 +7,7 @@
 
 🔗 **仓库**：https://github.com/Zviolin/CellStrata
 📄 **实验报告（PDF，60 页）**：[`40-报告/01-实验报告.pdf`](40-报告/01-实验报告.pdf)
-📄 **LaTeX 论文（PDF，13 页，中文期刊版式）**：[`50-论文/main.pdf`](50-论文/main.pdf)　｜　[源码 `main.tex`](50-论文/main.tex)
+📄 **LaTeX 论文（PDF，14 页，中文期刊版式）**：[`50-论文/main.pdf`](50-论文/main.pdf)　｜　[源码 `main.tex`](50-论文/main.tex)
 
 ---
 
@@ -130,9 +130,9 @@ python 20-分析/91_下载大文件.py --url <直链> --out 10-数据/tabula_sap
 │   ├── 00-报告框架.md        ← 口径校正表 + 方法学修正记录 + 答辩预案
 │   ├── 01-实验报告.md        ← ★ 正式报告（含附录 E 算法说明）
 │   └── 数字体检报告.md        ← 报告全量数字体检清单（485 行）
-├── 50-论文/                  ← LaTeX 论文（中文期刊模板 cjc 双栏，13 页）
+├── 50-论文/                  ← LaTeX 论文（中文期刊模板 cjc 双栏，14 页）
 │   ├── main.tex / main.pdf   ← 正文源码与成品
-│   ├── references.bib        ← 13 条参考文献，全部经 Crossref 核实
+│   ├── references.bib        ← 16 条参考文献，全部经 Crossref 核实
 │   ├── cjc.cls / cjc.bst     ← 期刊模板（cls 已打 expl3 兼容补丁）
 │   └── journal-template/     ← 模板原件（未打补丁，仅供对照）
 └── 90-归档/                  ← 各阶段日志
